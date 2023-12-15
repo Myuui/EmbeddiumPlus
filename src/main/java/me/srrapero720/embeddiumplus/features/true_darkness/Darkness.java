@@ -149,7 +149,7 @@ public class Darkness {
 				float min = Math.max(skyFactor * 0.05f, EmbPlusConfig.darknessOption.get().value);
 				final float rawAmbient = ambient * skyFactor;
 				final float minAmbient = rawAmbient * (1 - min) + min;
-				final float skyBase = LightTexture.getBrightness(dim, skyIndex) * minAmbient;
+				final float skyBase = dim.brightness(skyIndex) * minAmbient;
 
 				min = Math.max(0.35f * skyFactor, EmbPlusConfig.darknessOption.get().value);
 				float v = skyBase * (rawAmbient * (1 - min) + min);
@@ -171,7 +171,7 @@ public class Darkness {
 						blockFactor = 1 - blockFactor * blockFactor * blockFactor * blockFactor;
 					}
 
-					final float blockBase = blockFactor * LightTexture.getBrightness(dim, blockIndex) * (prevFlicker * 0.1F + 1.5F);
+					final float blockBase = blockFactor * dim.brightness(blockIndex) * (prevFlicker * 0.1F + 1.5F);
 					min = 0.4f * blockFactor;
 					final float blockGreen = blockBase * ((blockBase * (1 - min) + min) * (1 - min) + min);
 					final float blockBlue = blockBase * (blockBase * blockBase * (1 - min) + min);
@@ -205,7 +205,7 @@ public class Darkness {
 						blue = 1.0F;
 					}
 
-					final float gamma = client.options.gamma().get().floatValue() * f;
+					final float gamma = (float) (client.options.gamma * f);
 					float invRed = 1.0F - red;
 					float invGreen = 1.0F - green;
 					float invBlue = 1.0F - blue;

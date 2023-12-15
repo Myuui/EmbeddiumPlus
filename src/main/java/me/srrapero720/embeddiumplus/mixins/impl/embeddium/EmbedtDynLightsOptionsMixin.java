@@ -15,6 +15,7 @@ import me.srrapero720.embeddiumplus.EmbPlusConfig;
 import me.srrapero720.embeddiumplus.EmbPlusConfig.DynamicLightsQuality;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -39,14 +40,14 @@ public abstract class EmbedtDynLightsOptionsMixin {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, DynamicLightsQuality> qualityMode = OptionImpl.createBuilder(DynamicLightsQuality.class, embeddiumPlus$dynLightsOpts)
-                .setName(Component.translatable("embeddium.plus.options.dynlights.speed.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.dynlights.speed.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.dynlights.speed.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.dynlights.speed.desc"))
                 .setControl((option) -> new CyclingControl<>(option, DynamicLightsQuality.class, new Component[] {
-                                Component.translatable("embeddium.plus.options.common.off"),
-                                Component.translatable("embeddium.plus.options.common.slow"),
-                                Component.translatable("embeddium.plus.options.common.fast"),
-                                Component.translatable("embeddium.plus.options.common.faster"),
-                                Component.translatable("embeddium.plus.options.common.realtime")
+                                new TranslatableComponent("embeddium.plus.options.common.off"),
+                                new TranslatableComponent("embeddium.plus.options.common.slow"),
+                                new TranslatableComponent("embeddium.plus.options.common.fast"),
+                                new TranslatableComponent("embeddium.plus.options.common.faster"),
+                                new TranslatableComponent("embeddium.plus.options.common.realtime")
                         }))
                 .setBinding((options, value) -> {
                             EmbPlusConfig.dynQuality.set(value);
@@ -58,8 +59,8 @@ public abstract class EmbedtDynLightsOptionsMixin {
 
 
         OptionImpl<SodiumGameOptions, Boolean> entityLighting = OptionImpl.createBuilder(Boolean.class, embeddiumPlus$dynLightsOpts)
-                .setName(Component.translatable("embeddium.plus.options.dynlights.entities.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.dynlights.entities.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.dynlights.entities.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.dynlights.entities.desc"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> EmbPlusConfig.entityLighting.set(value),
@@ -68,8 +69,8 @@ public abstract class EmbedtDynLightsOptionsMixin {
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> tileEntityLighting = OptionImpl.createBuilder(Boolean.class, embeddiumPlus$dynLightsOpts)
-                .setName(Component.translatable("embeddium.plus.options.dynlights.blockentities.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.dynlights.blockentities.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.dynlights.blockentities.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.dynlights.blockentities.desc"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> EmbPlusConfig.tileEntityLighting.set(value),
@@ -85,6 +86,6 @@ public abstract class EmbedtDynLightsOptionsMixin {
                 .build()
         );
 
-        pages.add(new OptionPage(Component.translatable("embeddium.plus.options.dynlights.group"), ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage(new TranslatableComponent("embeddium.plus.options.dynlights.group"), ImmutableList.copyOf(groups)));
     }
 }

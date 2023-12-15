@@ -16,7 +16,7 @@ public abstract class BackgroundRendererMixin {
     @Unique private static final float FOG_START = -8.0F;
     @Unique private static final float FOG_END = 1_000_000.0F;
 
-    @Inject(method = "setupFog", at = @At("RETURN"))
+    @Inject(method = "setupFog(Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/FogRenderer$FogMode;FZF)V", at = @At("RETURN"), remap = false)
     private static void applyFogModifyDistance(Camera camera, FogRenderer.FogMode fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo info) {
         if (!EmbPlusConfig.fog.get()) {
             RenderSystem.setShaderFogStart(FOG_START);

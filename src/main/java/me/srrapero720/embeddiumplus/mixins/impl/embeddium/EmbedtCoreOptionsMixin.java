@@ -13,6 +13,7 @@ import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage
 import me.srrapero720.embeddiumplus.EmbPlusAPI;
 import net.minecraft.client.Options;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -39,12 +40,12 @@ public class EmbedtCoreOptionsMixin {
             ))
     private static ImmutableList<OptionGroup> injectAdvanced(Collection<OptionGroup> groups) {
         Option<EmbPlusConfig.Complexity> displayFps = OptionImpl.createBuilder(EmbPlusConfig.Complexity.class, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.displayfps.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.displayfps.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.displayfps.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.displayfps.desc"))
                 .setControl((option) -> new CyclingControl<>(option, EmbPlusConfig.Complexity.class, new Component[]{
-                        Component.translatable("embeddium.plus.options.common.off"),
-                        Component.translatable("embeddium.plus.options.common.simple"),
-                        Component.translatable("embeddium.plus.options.common.advanced")
+                        new TranslatableComponent("embeddium.plus.options.common.off"),
+                        new TranslatableComponent("embeddium.plus.options.common.simple"),
+                        new TranslatableComponent("embeddium.plus.options.common.advanced")
                 }))
                 .setBinding(
                         (opts, value) -> EmbPlusConfig.fpsCounterMode.set(value),
@@ -54,8 +55,8 @@ public class EmbedtCoreOptionsMixin {
 
 
         Option<Integer> displayFpsPos = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.displayfps.position.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.displayfps.position.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.displayfps.position.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.displayfps.position.desc"))
                 .setControl((option) -> new SliderControl(option, 4, 64, 2, ControlValueFormatter.translateVariable("Pixels")))
                 .setImpact(OptionImpact.LOW)
                 .setBinding(
@@ -70,8 +71,8 @@ public class EmbedtCoreOptionsMixin {
 
 
         OptionImpl<SodiumGameOptions, Boolean> totalDarkness = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.darkness.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.darkness.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.darkness.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.darkness.desc"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> EmbPlusConfig.trueDarknessEnabled.set(value),
@@ -80,13 +81,13 @@ public class EmbedtCoreOptionsMixin {
                 .build();
 
         Option<EmbPlusConfig.DarknessMode> totalDarknessSetting = OptionImpl.createBuilder(EmbPlusConfig.DarknessMode.class, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.darkness.mode.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.darkness.mode.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.darkness.mode.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.darkness.mode.desc"))
                 .setControl((option) -> new CyclingControl<>(option, EmbPlusConfig.DarknessMode.class, new Component[]{
-                        Component.translatable("embeddium.plus.options.darkness.mode.pitchblack"),
-                        Component.translatable("embeddium.plus.options.darkness.mode.reallydark"),
-                        Component.translatable("embeddium.plus.options.darkness.mode.dark"),
-                        Component.translatable("embeddium.plus.options.darkness.mode.dim")
+                        new TranslatableComponent("embeddium.plus.options.darkness.mode.pitchblack"),
+                        new TranslatableComponent("embeddium.plus.options.darkness.mode.reallydark"),
+                        new TranslatableComponent("embeddium.plus.options.darkness.mode.dark"),
+                        new TranslatableComponent("embeddium.plus.options.darkness.mode.dim")
                 }))
                 .setBinding(
                         (opts, value) -> EmbPlusConfig.darknessOption.set(value),
@@ -101,12 +102,12 @@ public class EmbedtCoreOptionsMixin {
 
 
         Option<EmbPlusConfig.FadeInQuality> fadeInQuality = OptionImpl.createBuilder(EmbPlusConfig.FadeInQuality.class, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.chunkfadeinquality.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.chunkfadeinquality.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.chunkfadeinquality.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.chunkfadeinquality.desc"))
                 .setControl((option) -> new CyclingControl<>(option, EmbPlusConfig.FadeInQuality.class, new Component[]{
-                        Component.translatable("options.off"),
-                        Component.translatable("options.graphics.fast"),
-                        Component.translatable("options.graphics.fancy")
+                        new TranslatableComponent("options.off"),
+                        new TranslatableComponent("options.graphics.fast"),
+                        new TranslatableComponent("options.graphics.fancy")
                 }))
                 .setBinding(
                         (opts, value) -> EmbPlusConfig.fadeInQuality.set(value),
@@ -116,8 +117,8 @@ public class EmbedtCoreOptionsMixin {
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> fog = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.fog.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.fog.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.fog.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.fog.desc"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> EmbPlusConfig.fog.set(value),
@@ -126,8 +127,8 @@ public class EmbedtCoreOptionsMixin {
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> hideJEI = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.jei.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.jei.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.jei.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.jei.desc"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> EmbPlusConfig.hideJEI.set(value),
@@ -136,8 +137,8 @@ public class EmbedtCoreOptionsMixin {
                 .build();
 
         OptionImpl<SodiumGameOptions, Integer> cloudHeight = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.clouds.height.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.clouds.height.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.clouds.height.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.clouds.height.desc"))
                 .setControl((option) -> new SliderControl(option, 64, 364, 4, ControlValueFormatter.translateVariable("Blocks")))
                 .setBinding(
                         (options, value) -> {
@@ -157,8 +158,8 @@ public class EmbedtCoreOptionsMixin {
 
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.culling.entity.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.culling.entity.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.culling.entity.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.culling.entity.desc"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> EmbPlusConfig.enableDistanceChecks.set(value),
@@ -167,8 +168,8 @@ public class EmbedtCoreOptionsMixin {
                 .build();
 
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.culling.entity.distance.h.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.culling.entity.distance.h.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.culling.entity.distance.h.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.culling.entity.distance.h.desc"))
                 .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.translateVariable("Blocks")))
                 .setBinding(
                         (options, value) -> EmbPlusConfig.maxEntityRenderDistanceSquare.set(value * value),
@@ -177,8 +178,8 @@ public class EmbedtCoreOptionsMixin {
                 .build();
 
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistanceVertical = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.culling.entity.distance.v.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.culling.entity.distance.v.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.culling.entity.distance.v.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.culling.entity.distance.v.desc"))
                 .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("Blocks")))
                 .setBinding(
                         (options, value) -> EmbPlusConfig.maxEntityRenderDistanceY.set(value),
@@ -197,8 +198,8 @@ public class EmbedtCoreOptionsMixin {
 
 
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.culling.tile.distance.h.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.culling.tile.distance.h.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.culling.tile.distance.h.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.culling.tile.distance.h.desc"))
                 .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.translateVariable("Blocks")))
                 .setBinding(
                         (options, value) -> EmbPlusConfig.maxTileEntityRenderDistanceSquare.set(value * value),
@@ -207,8 +208,8 @@ public class EmbedtCoreOptionsMixin {
                 .build();
 
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistanceVertical = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.translatable("embeddium.plus.options.culling.tile.distance.v.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.culling.tile.distance.v.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.culling.tile.distance.v.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.culling.tile.distance.v.desc"))
                 .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("Blocks")))
                 .setBinding(
                         (options, value) -> EmbPlusConfig.maxTileEntityRenderDistanceY.set(value),
@@ -233,12 +234,12 @@ public class EmbedtCoreOptionsMixin {
     )
     private static void redirectGeneralOptions(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
         OptionImpl<Options, EmbPlusConfig.FullScreenMode> fullscreenMode = OptionImpl.createBuilder(EmbPlusConfig.FullScreenMode.class, vanillaOpts)
-                .setName(Component.translatable("embeddium.plus.options.screen.title"))
-                .setTooltip(Component.translatable("embeddium.plus.options.screen.desc"))
+                .setName(new TranslatableComponent("embeddium.plus.options.screen.title"))
+                .setTooltip(new TranslatableComponent("embeddium.plus.options.screen.desc"))
                 .setControl((opt) -> new CyclingControl<>(opt, EmbPlusConfig.FullScreenMode.class, new Component[] {
-                        Component.translatable("embeddium.plus.options.screen.windowed"),
-                        Component.translatable("embeddium.plus.options.screen.borderless"),
-                        Component.translatable("options.fullscreen")
+                        new TranslatableComponent("embeddium.plus.options.screen.windowed"),
+                        new TranslatableComponent("embeddium.plus.options.screen.borderless"),
+                        new TranslatableComponent("options.fullscreen")
                 }))
                 .setBinding(EmbPlusAPI::setFullScreenMode, (opts) -> EmbPlusConfig.fullScreenMode.get())
                 .build();
@@ -261,6 +262,6 @@ public class EmbedtCoreOptionsMixin {
 
     @Inject(method = "advanced", at = @At("RETURN"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
     private static void ChangeCategoryName(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups) {
-        cir.setReturnValue(new OptionPage(Component.translatable("embeddium.plus.options.plus"), ImmutableList.copyOf(groups)));
+        cir.setReturnValue(new OptionPage(new TranslatableComponent("embeddium.plus.options.plus"), ImmutableList.copyOf(groups)));
     }
 }

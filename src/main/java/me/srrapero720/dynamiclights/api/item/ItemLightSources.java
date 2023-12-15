@@ -33,8 +33,7 @@ import net.minecraft.world.item.ItemStack;
  * @since 1.3.0
  */
 public final class ItemLightSources {
-	private static final JsonParser JSON_PARSER = new JsonParser();
-	private static final List<ItemLightSource> ITEM_LIGHT_SOURCES = new ArrayList<>();
+    private static final List<ItemLightSource> ITEM_LIGHT_SOURCES = new ArrayList<>();
 	private static final List<ItemLightSource> STATIC_ITEM_LIGHT_SOURCES = new ArrayList<>();
 
 	private ItemLightSources() {
@@ -49,18 +48,18 @@ public final class ItemLightSources {
 	public static void load(@NotNull ResourceManager resourceManager) {
 		ITEM_LIGHT_SOURCES.clear();
 
-		resourceManager.listResources("dynamiclights/item", path -> path.getPath().endsWith(".json")).forEach((id, resource) -> {
-			load(resourceManager, id, resource);
+		resourceManager.listResources("dynamiclights/item", path -> path.endsWith(".json")).forEach((id) -> {
+			load(resourceManager, id);
 		});
 
 		ITEM_LIGHT_SOURCES.addAll(STATIC_ITEM_LIGHT_SOURCES);
 	}
 
-	private static void load(@NotNull ResourceManager resourceManager, @NotNull ResourceLocation resourceId, Resource resource) {
+	private static void load(@NotNull ResourceManager resourceManager, @NotNull ResourceLocation resourceId) {
 		var id = new ResourceLocation(resourceId.getNamespace(), resourceId.getPath().replace(".json", ""));
 
 		try {
-			var json = JSON_PARSER.parse(new InputStreamReader(resource.open())).getAsJsonObject();
+			var json = JsonParser.parseReader(new InputStreamReader(resourceManager.getResource(resourceId).getInputStream())).getAsJsonObject();
 
 			ItemLightSource.fromJson(id, json).ifPresent(data -> {
 				if (!STATIC_ITEM_LIGHT_SOURCES.contains(data))

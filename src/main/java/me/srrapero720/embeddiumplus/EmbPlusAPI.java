@@ -8,16 +8,16 @@ import net.minecraft.client.Options;
 public class EmbPlusAPI {
     public static void setFullScreenMode(Options opts, EmbPlusConfig.FullScreenMode value) {
         EmbPlusConfig.fullScreenMode.set(value);
-        opts.fullscreen.set(value != EmbPlusConfig.FullScreenMode.WINDOWED);
+        opts.fullscreen = value != EmbPlusConfig.FullScreenMode.WINDOWED;
 
         Minecraft client = Minecraft.getInstance();
         Window window = client.getWindow();
-        if (window.isFullscreen() != opts.fullscreen.get()) {
+        if (window.isFullscreen() != opts.fullscreen) {
             window.toggleFullScreen();
-            opts.fullscreen.set(window.isFullscreen());
+            opts.fullscreen = window.isFullscreen();
         }
 
-        if (opts.fullscreen.get()) {
+        if (opts.fullscreen) {
             ((MainWindowAccessor) (Object) window).setDirty(true);
             window.changeFullscreenVideoMode();
         }

@@ -21,11 +21,11 @@ public class ExtendedServerViewDistanceMixin {
 
     @Redirect(method = "handleSetChunkCacheRadius", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundSetChunkCacheRadiusPacket;getRadius()I"))
     private int onViewDistChange(ClientboundSetChunkCacheRadiusPacket sUpdateViewDistancePacket) {
-        return Math.max(sUpdateViewDistancePacket.getRadius(), Minecraft.getInstance().options.renderDistance().get());
+        return Math.max(sUpdateViewDistancePacket.getRadius(), Minecraft.getInstance().options.renderDistance);
     }
 
     @Redirect(method = "handleLogin", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundLoginPacket;chunkRadius()I"))
     private int onJoinGame(ClientboundLoginPacket sJoinGamePacket) {
-        return Math.max(sJoinGamePacket.chunkRadius(), Minecraft.getInstance().options.renderDistance().get());
+        return Math.max(sJoinGamePacket.chunkRadius(), Minecraft.getInstance().options.renderDistance);
     }
 }
