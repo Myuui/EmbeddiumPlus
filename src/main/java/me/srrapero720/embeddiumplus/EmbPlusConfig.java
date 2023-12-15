@@ -94,7 +94,7 @@ public class EmbPlusConfig {
                             .comment("List of entities to not be ignored when are out of configured radius.")
                             .comment("Accepts ResourceLocation and Mod IDs")
                             .comment("Example: \"minecraft:bat\" for specific entity or \"alexmobs:*\" for all mod specific entities")
-                            .defineListAllowEmpty("entityWhitelist", Collections::emptyList, (s) -> s.toString().contains(":"));
+                            .defineListAllowEmpty(Collections.singletonList("entityWhitelist"), Collections::emptyList, (s) -> s.toString().contains(":"));
         });
 
         builder.comment("Configure max BlockEntity distance")

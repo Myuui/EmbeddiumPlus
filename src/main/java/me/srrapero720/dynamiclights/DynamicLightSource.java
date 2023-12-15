@@ -79,7 +79,7 @@ public interface DynamicLightSource {
 
 	/**
 	 * Returns the luminance of the light source.
-	 * The maximum is 15, below 1 values are ignored.
+	 * The maximum is 15, below one value are ignored.
 	 *
 	 * @return the luminance of the light source
 	 */

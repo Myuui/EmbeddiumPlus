@@ -1,8 +1,9 @@
 package me.srrapero720.embeddiumplus.mixins.impl.frames;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import me.srrapero720.embeddiumplus.features.frame_overlay.MinFrameProvider;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import me.srrapero720.embeddiumplus.EmbPlusConfig;
 
 import java.util.LinkedList;
+
 
 @Mixin(ForgeGui.class)
 public class FrameCounterMixin {
@@ -23,7 +25,7 @@ public class FrameCounterMixin {
     private final LinkedList<Integer> embeddiumExtras$fpsRunningAverageQueue = new LinkedList<>();
 
     @Inject(method = "render", at = @At("HEAD"))
-    public void render(GuiGraphics matrixStack, float tickDelta, CallbackInfo info) {
+    public void render(PoseStack matrixStack, float tickDelta, CallbackInfo info) {
         String displayString;
         switch (EmbPlusConfig.fpsCounterMode.get()) {
             case SIMPLE -> {
@@ -71,7 +73,7 @@ public class FrameCounterMixin {
 //        }
 //        else
 //        {
-            matrixStack.drawString(client.font, displayString, textPos, textPos, drawColor, true);
+             GuiComponent.drawString(matrixStack, client.font, displayString, (int) textPos, (int) textPos, drawColor);
         //}
     }
 

@@ -31,7 +31,6 @@
     "dynamiclights.lightsource.ExplosiveProjectileEntityMixin",
     "dynamiclights.lightsource.LivingEntityMixin",
     "dynamiclights.lightsource.TntEntityMixin",
-    "dynamiclights.embeddium.ArrayLightDataCacheMixin",
     "dynamiclights.embeddium.FlatLightPipelineMixin",
     "dynamiclights.embeddium.LightDataAccessMixin",
     "embeddium.EmbedtCoreOptionsMixin",
